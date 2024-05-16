@@ -589,6 +589,7 @@ body.disable--scroll {
     }
     .feedback-form-wrapper {
         padding: 30px 0 70px;
+        background-position: bottom right 10px;
     }
     .main {
         gap: 40px;
@@ -670,10 +671,17 @@ body.disable--scroll {
     .roadmap-inner .logo-left {
         display: none;
     }
+    .roadmap-inner::after {
+        left: 0;
+        width: 100%;
+    }
     .roadmap-scroll {
         margin-left: -20px;
-        width: calc(100% + 20px);
+        min-width: 100vw;
         padding: 0 20px;
+    }
+    .faq-accordion {
+        padding: 20px 16px 0;
     }
     .roadmap-point {
         min-height: 400px;
