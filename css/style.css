@@ -588,7 +588,7 @@ body.disable--scroll {
         grid-template-columns: 1fr;
     }
     .feedback-form-wrapper {
-        padding: 30px 0;
+        padding: 30px 0 70px;
     }
     .main {
         gap: 40px;
@@ -650,14 +650,14 @@ body.disable--scroll {
         letter-spacing: 3.1px;
     }
     .main-title .thin {
-        font-size: 41px;
+        font-size: 34px;
         letter-spacing: 4.1px;
     }
     .title {
         font-size: 36px;
     }
     .title.title--large { 
-        font-size: 41px;
+        font-size: 34px;
     }
     .text--large {
         font-size: 20px;
@@ -677,5 +677,14 @@ body.disable--scroll {
     }
     .roadmap-point {
         min-height: 400px;
+    }
+    .feedback-form-wrapper {
+        max-width: calc(100vw - 40px);
+    }
+}
+
+@media (max-width: 540px) {
+    .advantages-grid__item {
+        padding: 20px;
     }
 }
