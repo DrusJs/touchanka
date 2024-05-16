@@ -678,7 +678,7 @@ body.disable--scroll {
     .roadmap-point {
         min-height: 400px;
     }
-    .feedback-form-wrapper {
+    .feedback-form-wrapper, .header-inner {
         max-width: calc(100vw - 40px);
     }
 }
