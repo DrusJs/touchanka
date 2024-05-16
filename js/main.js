@@ -15,6 +15,11 @@ function accordionToggleEvent(e) {
     }
 }
 
+function BurgerMenuEvent() {
+    document.querySelector('.navigation').classList.toggle("active")
+    document.body.classList.toggle("disable--scroll")
+}
+
 function checkBlocksVisibility() {
     let windowHeight = window.innerHeight;
     let blocks = document.querySelectorAll('.fade');
@@ -45,4 +50,35 @@ window.addEventListener('scroll', checkBlocksVisibility)
 
 if (document.querySelector('.faq-accordion')) {
     document.querySelectorAll('.faq-accordion-head').forEach((accordion) => accordion.addEventListener('click', accordionToggleEvent))
+}
+
+document.querySelector('.burger-button').addEventListener('click', BurgerMenuEvent)
+
+if (document.querySelector('.roadmap-scroll')) {
+    const slider = document.querySelector('.roadmap-scroll')
+    let isDown = false
+    let startX
+    let scrollLeft
+    
+    slider.addEventListener('mousedown', (e) => {
+      isDown = true
+      slider.classList.add('active')
+      startX = e.pageX - slider.offsetLeft
+      scrollLeft = slider.scrollLeft
+    });
+    slider.addEventListener('mouseleave', () => {
+      isDown = false;
+      slider.classList.remove('active')
+    });
+    slider.addEventListener('mouseup', () => {
+      isDown = false;
+      slider.classList.remove('active')
+    });
+    slider.addEventListener('mousemove', (e) => {
+      if(!isDown) return
+      e.preventDefault()
+      const x = e.pageX - slider.offsetLeft
+      const walk = (x - startX);
+      slider.scrollLeft = scrollLeft - walk
+    })
 }
