@@ -52,6 +52,13 @@ if (document.querySelector('.faq-accordion')) {
     document.querySelectorAll('.faq-accordion-head').forEach((accordion) => accordion.addEventListener('click', accordionToggleEvent))
 }
 
+document.querySelectorAll('.navigation__item a').forEach(link => {
+    link.addEventListener('click', ()=>{
+        document.querySelector('.navigation').classList.remove("active")
+        document.body.classList.remove("disable--scroll")
+    })
+})
+
 document.querySelector('.burger-button').addEventListener('click', BurgerMenuEvent)
 
 if (document.querySelector('.roadmap-scroll')) {
