@@ -62,30 +62,73 @@ document.querySelectorAll('.navigation__item a').forEach(link => {
 document.querySelector('.burger-button').addEventListener('click', BurgerMenuEvent)
 
 if (document.querySelector('.roadmap-scroll')) {
-    const slider = document.querySelector('.roadmap-scroll')
+    const roadmapItem = document.querySelector('.roadmap-scroll')
     let isDown = false
     let startX
     let scrollLeft
     
-    slider.addEventListener('mousedown', (e) => {
+    roadmapItem.addEventListener('mousedown', (e) => {
       isDown = true
-      slider.classList.add('active')
-      startX = e.pageX - slider.offsetLeft
-      scrollLeft = slider.scrollLeft
+      roadmapItem.classList.add('active')
+      startX = e.pageX - roadmapItem.offsetLeft
+      scrollLeft = roadmapItem.scrollLeft
     });
-    slider.addEventListener('mouseleave', () => {
+    roadmapItem.addEventListener('mouseleave', () => {
       isDown = false;
-      slider.classList.remove('active')
+      roadmapItem.classList.remove('active')
     });
-    slider.addEventListener('mouseup', () => {
+    roadmapItem.addEventListener('mouseup', () => {
       isDown = false;
-      slider.classList.remove('active')
+      roadmapItem.classList.remove('active')
     });
-    slider.addEventListener('mousemove', (e) => {
+    roadmapItem.addEventListener('mousemove', (e) => {
       if(!isDown) return
       e.preventDefault()
-      const x = e.pageX - slider.offsetLeft
+      const x = e.pageX - roadmapItem.offsetLeft
       const walk = (x - startX);
-      slider.scrollLeft = scrollLeft - walk
+      roadmapItem.scrollLeft = scrollLeft - walk
+    })
+}
+
+if (document.querySelector('.scroll-wrapper')) {
+    const scrollItem = document.querySelector('.scroll-wrapper')
+    const backButton = document.querySelector('.back-button')
+    let isDown = false
+    let startX
+    let scrollLeft
+    
+    scrollItem.addEventListener('mousedown', (e) => {
+      isDown = true
+      scrollItem.classList.add('active')
+      startX = e.pageX - scrollItem.offsetLeft
+      scrollLeft = scrollItem.scrollLeft
+    });
+    scrollItem.addEventListener('mouseleave', () => {
+      isDown = false;
+      scrollItem.classList.remove('active')
+    });
+    scrollItem.addEventListener('mouseup', () => {
+      isDown = false;
+      scrollItem.classList.remove('active')
+    });
+    scrollItem.addEventListener('mousemove', (e) => {
+      if(!isDown) return
+      e.preventDefault()
+      const x = e.pageX - scrollItem.offsetLeft
+      const walk = (x - startX);
+      scrollItem.scrollLeft = scrollLeft - walk
+      if (+scrollItem.scrollLeft > 500) {
+        backButton.classList.add('active')
+      } else {
+        backButton.classList.remove('active')
+      }
+    })
+    backButton.addEventListener('click', () => {
+        scrollItem.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+        });
+        backButton.classList.remove('active')
     })
 }
