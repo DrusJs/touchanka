@@ -7,11 +7,11 @@ function accordionToggleEvent(e) {
     if (accordion.classList.contains('active')) {
         if (activeAccordion) {
             activeAccordion.classList.remove('active')
-            activeAccordion.querySelector('.faq-accordion-dropdown').style.maxHeight = "0px"
+            // activeAccordion.querySelector('.faq-accordion-dropdown').style.height = "0px"
         }
-        dropdown.style.maxHeight = `${dropdown.scrollHeight + 30}px`
+        // dropdown.style.height = `${dropdown.scrollHeight + 30}px`
     } else {
-        dropdown.style.maxHeight = "0px"
+        // dropdown.style.height = "0px"
     }
 }
 
@@ -117,7 +117,14 @@ if (document.querySelector('.scroll-wrapper')) {
       const x = e.pageX - scrollItem.offsetLeft
       const walk = (x - startX);
       scrollItem.scrollLeft = scrollLeft - walk
-      if (+scrollItem.scrollLeft > 500) {
+      if (+scrollItem.scrollLeft > 300) {
+        backButton.classList.add('active')
+      } else {
+        backButton.classList.remove('active')
+      }
+    })
+    scrollItem.addEventListener('scroll', (e) => {
+      if (+scrollItem.scrollLeft > 300) {
         backButton.classList.add('active')
       } else {
         backButton.classList.remove('active')
@@ -131,4 +138,39 @@ if (document.querySelector('.scroll-wrapper')) {
         });
         backButton.classList.remove('active')
     })
+}
+
+function setItemCount(count) {
+  if (+document.getElementById('from').innerHTML + count < 1) { return }
+  if (+document.getElementById('to').innerHTML + count > +document.querySelectorAll('.gallery-item').length) { return }
+  document.getElementById('from').innerHTML = +document.getElementById('from').innerHTML + count
+  document.getElementById('to').innerHTML = +document.getElementById('to').innerHTML + count
+}
+
+if (document.querySelector('.swipe-action')) {
+  let gallery = document.querySelector('.gallery-wrapper')
+
+  document.querySelector('.swiper-prev').addEventListener('click', ()=>{
+    let delta = +document.querySelector('.gallery-item').clientWidth + 10
+    gallery.scrollTo({
+      top: 0,
+      left: gallery.scrollLeft - delta,
+      behavior: "smooth",
+    });
+
+    if (gallery.scrollLeft <= 0) { return }
+    setItemCount(-1)
+  })
+
+  document.querySelector('.swiper-next').addEventListener('click', ()=>{
+    let delta = +document.querySelector('.gallery-item').clientWidth + 10
+    let isChange = +gallery.scrollLeft
+    gallery.scrollTo({
+      top: 0,
+      left: gallery.scrollLeft + delta,
+      behavior: "smooth",
+    });
+    if (isChange + delta > gallery.scrollWidth) { return }
+    setItemCount(1)
+  })
 }
